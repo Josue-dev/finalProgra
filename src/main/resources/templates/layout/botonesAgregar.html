@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"
+       xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <title>Botones Agregar</title>
+        <meta charset="UTF-8"/>
+
+    </head>
+    <body>
+        <section th:fragment="botonesAgregar" class="py-4 mb-4 bg-light">
+            <div class="container">
+                <div class="row">                   
+                    <div class="col-md-3" sec:authorize="hasRole('ROLE_USER')">
+                        <a th:href="@{/agregar}" type="button" class="btn btn-outline-primary btn-block" >
+                            <i class="fas fa-plus"></i> Agregar Persona
+                        </a>
+                    </div>
+                    <div class="col-md-3  mt-2" sec:authorize="hasRole('ROLE_ADMIN')">
+                        <a th:href="@{/agregarPais}" type="button" class="btn btn-outline-primary btn-block" >
+                            <i class="fas fa-plus"></i>Agregar Pais
+                        </a>
+                    </div>
+                    <div class="col-md-3  mt-2" sec:authorize="hasRole('ROLE_ADMIN')">
+                        <a th:href="@{/agregarLaboratorio}" type="button" class="btn btn-outline-primary btn-block" >
+                            <i class="fas fa-plus"></i>Agregar Laboratorio
+                        </a>
+                    </div>
+                </div>
+                <!-- segunda columna de botones -->
+                <div class="row mt-3">
+                    <div class="col-md-3 " sec:authorize="hasRole('ROLE_ADMIN')">
+                        <a th:href="@{/agregarTipoVacuna}" type="button" class="btn btn-outline-primary btn-block" >
+                            <i class="fas fa-plus"></i>Agregar TipoVacuna
+                        </a>
+                    </div>
+                    <div class="col-md-3 mt-2" sec:authorize="hasRole('ROLE_ADMIN')">
+                        <a th:href="@{/agregarInventarioVacuna}" type="button" class="btn btn-outline-primary btn-block" >
+                            <i class="fas fa-plus"></i>Agregar Inventario Vacunas
+                        </a>
+                    </div> 
+                    <div class="col-md-3  mt-2" sec:authorize="hasRole('ROLE_USER')">
+                        <a th:href="@{/agregarAplicacionDosis}" type="button" class="btn btn-outline-primary btn-block" >
+                            <i class="fas fa-plus"></i> Aplicacion Dosis
+                        </a>
+                    </div> 
+                </div> <!-- segunda columna de botones -->
+            </div>
+        </section>
+
+    </body>
+</html>

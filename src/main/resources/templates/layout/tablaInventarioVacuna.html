@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"
+       xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:replace="layout/plantilla :: head">
+        <title>Inventario Tipo Vacuna</title>
+        <meta charset="UTF-8"/>
+
+    </head>
+    <body>
+        <header th:replace="layout/plantilla :: header"></header>
+        <section th:fragment="tablaInventario" class="py-4 mb-4 bg-light">
+            <div class="container">
+
+                <!---comenzamos con tablas inventario  -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card bg-info">
+                            <div class="card-header">
+                                <h4>Datos de Vacunas</h4>
+                            </div>
+                            <div class="table-responsive" th:if="${inventarioVacunas !=null and !inventarioVacunas.empty}">
+                                <table class="table table-stryped ">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>#</th>
+                                            <th>VACUNA</th>
+                                            <th>LABORATORIO</th>
+                                            <th>FECHA COMPRA</th>
+                                            <th>FECHA CADUCIDAD</th>
+                                            <th>NUMERO DE LOTE</th>
+                                             <th>PRECIO LOTE</th>
+                                            <th>CANTIDAD LOTE</th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="inventarioVacuna, contador : ${inventarioVacunas}">
+                                            <td>[[${contador.count}]]</td>
+                                            <td>[[${inventarioVacuna.idTipoVacuna}]]</td>
+                                            <td>[[${inventarioVacuna.idLaboratorio}]]</td>
+                                            <td>[[${inventarioVacuna.fechaCompra}]]</td>
+                                            <td>[[${inventarioVacuna.fechaCaducidad}]]</td>
+                                            <td>[[${inventarioVacuna.numeroLote}]]</td>
+                                            <td>[[${inventarioVacuna.precioLote}]]</td>
+                                            <td>[[${inventarioVacuna.cantidadLote}]]</td>
+                                            <td>
+                                                <a class="btn btn-warning" sec:authorize="hasRole('ROLE_ADMIN')" 
+                                                   th:href="@{/editarInventarioVacuna/}+${inventarioVacuna.idTipoVacuna}">
+                                                    [[#{accion.editar}]]</a>
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-danger" sec:authorize="hasRole('ROLE_ADMIN')" 
+                                                   th:href="@{/eliminarInventarioVacuna/}+${inventarioVacuna.idTipoVacuna}">
+                                                    [[#{accion.eliminar}]]</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="text-center p-2 bg-info" th:if="${inventarioVacunas==null or inventarioVacunas.empty}">
+                                <span>Lista de Vacunas vacia</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <footer th:replace="layout/plantilla :: footer"></footer>
+
+
+    </body>
+</html>

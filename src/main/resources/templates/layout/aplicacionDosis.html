@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html  xmlns:th="http://www.thymeleaf.org"
+       xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head  th:replace="layout/plantilla :: head">
+        <title>Agregar Pais</title>
+        <meta charset="UTF-8"/>
+
+    </head>
+    <body>
+        <header th:replace="layout/plantilla :: header"></header>
+
+        <div class="container col-md-6">
+            <div class="card  mt-5 py-4">
+                <div class="card-header">
+                    <h1 class="bg-info text-center">DATOS APLICACION DE DOSIS</h1>
+                </div>
+                <div class="card-body ">
+                    <form th:action="@{/guardarAplicacionDosis}" method="POST" th:object="${aplicacionDosis}" class="was-validated">
+                         <input type="hidden" name="idAplicacion" th:field="*{idAplicacion}"/>
+                        <div class="form-group">
+                            <label for="idInventarioVacuna">INVENTARIO</label>
+                            <input  class="form-control" type="text" required="true" name="idInventarioVacuna" th:field="*{idInventarioVacuna}"/>                          
+                  s      </div>
+                          <div class="form-group">
+                            <label for="idPersona">NOMBRE PERSONA</label>
+                            <input  class="form-control" type="text" required="true" name="idPersona" th:field="*{idPersona}"/>                          
+                        </div>
+                          <div class="form-group">
+                            <label for="fechaAplicacion">FECHA APLICACION </label>
+                            <input  class="form-control" type="text" required="true" name="fechaAplicacion" th:field="*{fechaAplicacion}"/>                          
+                        </div>
+                          <div class="form-group">
+                            <label for="cantidadAplicada">CANTIDAD APLICADA</label>
+                            <input  class="form-control" type="number" required="true" name="cantidadAplicada" th:field="*{cantidadAplicada}"/>                          
+                        </div>
+                        <input class="btn btn-primary btn-block" type="submit" name="guardar" th:value="#{accion.guardar}"/>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+        <footer th:replace="layout/plantilla :: footer"></footer>
+    </body>
+</html>

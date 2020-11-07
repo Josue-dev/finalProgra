@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"
+       xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:replace="layout/plantilla :: head">
+        <title>Agregar Tipo Vacuna</title>
+        <meta charset="UTF-8"/>
+
+    </head>
+    <body>
+        <header th:replace="layout/plantilla :: header"></header>
+         <section th:fragment="tablaDosis" class="py-4 mb-4 bg-light">
+             <div class="container">
+               
+                <!---comenzamos con tablas tipo vacuna  -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card bg-info">
+                            <div class="card-header">
+                                <h4>Datos de Vacunas</h4>
+                            </div>
+                            <div class="table-responsive" th:if="${aplicacionesDosis !=null and !aplicacionesDosis.empty}">
+                                <table class="table table-stryped ">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>#</th>
+                                            <th>ID INVENTARIO</th>
+                                            <th>NOMBRE PERSONA</th>
+                                            <th>FECHA APLICACION</th>
+                                            <th>CANTIDAD APLICADA</th>                                          
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="aplicacionDosis, contador : ${aplicacionesDosis}">
+                                            <td>[[${contador.count}]]</td>
+                                            <td>[[${aplicacionDosis.idInventarioVacuna}]]</td>
+                                            <td>[[${aplicacionDosis.idPersona}]]</td>
+                                            <td>[[${aplicacionDosis.fechaAplicacion}]]</td>
+                                            <td>[[${aplicacionDosis.cantidadAplicada}]]</td>
+                                            
+           
+                                            <td>
+                                                <a class="btn btn-warning" sec:authorize="hasRole('ROLE_ADMIN')" 
+                                                   th:href="@{/editarAplicacionDosis/}+${aplicacionDosis.idAplicacion}">
+                                                    [[#{accion.editar}]]</a>
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-danger" sec:authorize="hasRole('ROLE_ADMIN')" 
+                                                   th:href="@{/eliminarAplicacionDosis/}+${aplicacionDosis.idAplicacion}">
+                                                    [[#{accion.eliminar}]]</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="text-center p-2 bg-info" th:if="${aplicacionesDosis==null or aplicacionesDosis.empty}">
+                                <span>Lista de Vacunas vacia</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <footer th:replace="layout/plantilla :: footer"></footer>
+
+
+    </body>
+</html>

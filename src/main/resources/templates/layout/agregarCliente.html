@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"
+       xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:replace="layout/plantilla :: head">
+        <title>Agregar Laboratorio</title>
+        <meta charset="UTF-8"/>
+
+    </head>
+    <body>
+        <header th:replace="layout/plantilla :: header"></header>
+
+        <div class="container">
+            <div class="card  mt-5 py-4">
+                <div class="card-header">
+                    <h1 class="bg-info text-center">DATOS LABORATORIOS</h1>
+                </div>
+                <div class="card-body ">
+                    <form th:action="@{/guardarLaboratorio}" method="POST" th:object="${laboratorio}" class="was-validated">
+                        <input type="hidden" name="idLaboratorio" th:field="*{idLaboratorio}"/>
+                        <div  class="form-group">
+                            <label for="idPais">Pais</label>
+                            <input  class="form-control" type="text" required="true" name="idPais" th:field="*{idPais}"/>
+                            <!--select th:field="*{idPais}" class="form-control">
+                                <option value="1">guatemala</option>
+                                <option value="2">Estados Unidos</option>
+                                <option value="3">Canada</option>
+                                <option value="4">Rusia</option>
+                                <option th:each="pais:${paises}" th:value="${pais.idPais}" th:text="*{pais.nombrePais}"></option>
+                            </select-->
+                        </div>
+                        <div class="form-group">
+                            <label for="pais">Nombre Laboratorio</label>
+                            <input  class="form-control" type="text" required="true" name="nombreLaboratorio" th:field="*{nombreLaboratorio}"/>
+                            <!--span th:if="${#fields.hasErrors('cui')}" th:errors="*{cui}">Error del apellido</span-->
+                        </div>
+                        <input class="btn btn-primary btn-block" type="submit" name="guardar" th:value="#{accion.guardar}"/>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+        <footer th:replace="layout/plantilla :: footer"></footer>
+
+
+    </body>
+</html>

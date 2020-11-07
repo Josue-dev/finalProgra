@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html  xmlns:th="http://www.thymeleaf.org"
+       xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head  th:replace="layout/plantilla :: head">
+        <title>Agregar Pais</title>
+        <meta charset="UTF-8"/>
+
+    </head>
+    <body>
+        <header th:replace="layout/plantilla :: header"></header>
+
+        <div class="container">
+            <div class="card  mt-5 py-4">
+                <div class="card-header">
+                    <h1 class="bg-info text-center">DATOS DEL PAIS</h1>
+                </div>
+                <div class="card-body ">
+                    <form th:action="@{/guardarPais}" method="POST" th:object="${pais}" class="was-validated">
+                         <input type="hidden" name="idPais" th:field="*{idPais}"/>
+                        <div class="form-group">
+                            <label for="pais">Nombre del pais</label>
+                            <input  class="form-control" type="text" required="true" name="pais" th:field="*{nombrePais}"/>
+                            <!--span th:if="${#fields.hasErrors('cui')}" th:errors="*{cui}">Error del apellido</span-->
+                        </div>
+                        <input class="btn btn-primary btn-block" type="submit" name="guardar" th:value="#{accion.guardar}"/>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+        <footer th:replace="layout/plantilla :: footer"></footer>
+    </body>
+</html>

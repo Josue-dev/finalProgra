@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+
+<html  xmlns:th="http://www.thymeleaf.org"
+       xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8"/>
+
+    </head>
+    <body>
+        <section th:fragment="listadoClientes" id="clientes">
+            <div class="container">
+
+                <!---comenzamos con tablas personas  -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card bg-info">
+                            <div class="card-header">
+                                <h4>[[#{persona.titulo-list}]]</h4>
+                            </div>
+                            <div class="table-responsive" th:if="${personas !=null and !personas.empty}">
+                                <table class="table table-stryped ">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>#</th>
+                                            <th>[[#{persona.cui}]]</th>
+                                            <th>[[#{persona.nombre}]]</th>
+                                            <th>[[#{persona.fecha_nacimiento}]]</th>
+                                            <th>[[#{persona.direccion}]]</th>
+                                            <th>[[#{persona.movil}]]</th>
+                                            <th>[[#{persona.telefono_casa}]]</th>
+                                            <th>[[#{persona.encargado}]]</th>
+                                            <th>[[#{persona.cui_encargado}]]</th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="persona, contador : ${personas}">
+                                            <td>[[${contador.count}]]</td>
+                                            <td>[[${persona.cui}]]</td>
+                                            <td>[[${persona.nombre}]]</td>
+                                            <td>[[${persona.fechaNacimiento}]]</td>
+                                            <td>[[${persona.direccion}]]</td>
+                                            <td>[[${persona.telefonoMovil}]]</td>
+                                            <td>[[${persona.telefonoCasa}]]</td>
+                                            <td>[[${persona.nombreEncargado}]]</td>
+                                            <td>[[${persona.cuiEncargado}]]</td>
+                                            <td>
+                                                <a class="btn btn-warning" sec:authorize="hasRole('ROLE_ADMIN')" 
+                                                   th:href="@{/editar/}+${persona.idPersona}">
+                                                    [[#{accion.editar}]]</a>
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-danger" sec:authorize="hasRole('ROLE_ADMIN')" 
+                                                   th:href="@{/eliminar/}+${persona.idPersona}">
+                                                    [[#{accion.eliminar}]]</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="text-center p-2 bg-info" th:if="${personas==null or personas.empty}">
+                                <span>[[#{persona.lista-vacia}]]</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- para mostrar la tabla de paises -->
+            <div class="container mt-5">
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="card bg-info">
+                            <div class="card-header">
+                                <h4>[[#{persona.titulo-list}]]</h4>
+                            </div>
+                            <div  th:if="${paises !=null and !paises.empty}">
+                                <table class="table table-stryped">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Nombre</th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="pais, contador : ${paises}">
+                                            <td>[[${contador.count}]]</td>
+                                            <td>[[${pais.nombrePais}]]</td>
+                                            <td>
+                                                <a class="btn btn-warning" sec:authorize="hasRole('ROLE_ADMIN')" 
+                                                   th:href="@{/editarPais/}+${pais.idPais}">
+                                                    [[#{accion.editar}]]</a>
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-danger" sec:authorize="hasRole('ROLE_ADMIN')" 
+                                                   th:href="@{/eliminarPais/}+${pais.idPais}">
+                                                    [[#{accion.eliminar}]]</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="text-center p-2 bg-info" th:if="${paises==null or paises.empty}">
+                                <span class="bg-info">Lista de Paises Vacia</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- para mostrar la tabla de laboratorios -->
+            <div class="container mt-5">
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="card bg-info">
+                            <div class="card-header">
+                                <h4>Datos Laboratorios</h4>
+                            </div>
+                            <div  th:if="${laboratorios !=null and !laboratorios.empty}">
+                                <table class="table table-stryped">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Pais</th>
+                                            <th>Nombre</th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="laboratorio, contador : ${laboratorios}">
+                                            <td>[[${contador.count}]]</td>
+                                            <td>[[${laboratorio.idPais}]]</td>
+                                            <td>[[${laboratorio.nombreLaboratorio}]]</td>
+                                            <td>
+                                                <a class="btn btn-warning" sec:authorize="hasRole('ROLE_ADMIN')" 
+                                                   th:href="@{/editarLaboratorio/}+${laboratorio.idLaboratorio}">
+                                                    [[#{accion.editar}]]</a>
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-danger" sec:authorize="hasRole('ROLE_ADMIN')" 
+                                                   th:href="@{/eliminarLaboratorio/}+${laboratorio.idLaboratorio}">
+                                                    [[#{accion.eliminar}]]</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="text-center p-2 bg-info" th:if="${paises==null or paises.empty}">
+                                <span class="bg-info">Lista de Paises Vacia</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            
+            
+        </section>
+    </body>
+</html>

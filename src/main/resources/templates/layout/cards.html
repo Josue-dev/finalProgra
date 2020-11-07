@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"
+       xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <title>Cards</title>
+        <meta charset="UTF-8"/>
+
+    </head>
+    <body>
+        <section th:fragment="tarjetas" class="py-4 mb-4 bg-light">
+            <div class="container  ">
+                <!---tarjeta para conteo de personas  -->
+                <div class="row ">
+                    <div class="col-md-4 ">
+                        <div class="card text-center bg-info text-white mb-3">
+                            <div class="card-body">
+                                <h3 th:text="#{persona.totalPersonas}">Total personas</h3>
+                                <h4 class="display-4">
+                                    <i class="fas fa-users"></i> [[${totalClientes}]]
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card text-center bg-info text-white mb-3">
+                            <div class="card-body">
+                                <h3 >Total Paises</h3>
+                                <h4 class="display-4">
+                                    <i class="fas fa-map"></i> [[${totalPaises}]]
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card text-center bg-info text-white mb-3">
+                            <div class="card-body">
+                                <h3 >Laboratorios</h3>
+                                <h4 class="display-4">
+                                    <i class="fas fa-bong"></i> [[${totalLaboratorios}]]
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+                
+                <div class="row ">
+                     <div class="col-md-4">
+                        <div class="card text-center bg-info text-white mb-3">
+                            <div class="card-body">
+                                <h3 >Tipo Vacuna</h3>
+                                <h4 class="display-4">
+                                    <i class="fas fa-clinic-medical"></i> [[${totalTipoVacuna}]]
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card text-center bg-info text-white mb-3">
+                            <div class="card-body">
+                                <h3 >Inventario Vacunas</h3>
+                                <h4 class="display-4">
+                                    <i class="fas fa-file-pdf"></i> [[${totalInventarioVacunas}]]
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                 
+                    <div class="col-md-4">
+                        <div class="card text-center bg-info text-white mb-3">
+                            <div class="card-body">
+                                <h3 >Dosis Aplicadas</h3>
+                                <h4 class="display-4">
+                                    <i class="fas fa-chart-line"></i> [[${totalAplicaciones}]]
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!---Terminan tarjetas para mostrar cantidades  -->
+        </section>
+
+    </body>
+</html>
